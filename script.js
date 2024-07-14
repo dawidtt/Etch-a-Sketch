@@ -1,3 +1,34 @@
+const hexCharacters = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+];
+function getCharacter(index) {
+  return hexCharacters[index];
+}
+function generateColor() {
+  let hexColorRep = "#";
+  for (let index = 0; index < 6; index++) {
+    const randomPosition = Math.floor(Math.random() * hexCharacters.length);
+    hexColorRep += getCharacter(randomPosition);
+  }
+
+  return hexColorRep;
+}
+
 function createGrid(numberOfSquares = 256) {
   const container = document.querySelector("#container");
   for (let i = 0; i < numberOfSquares; i++) {
@@ -10,7 +41,8 @@ function createGrid(numberOfSquares = 256) {
     container.appendChild(div);
     let currentElement = document.querySelector(`#element-${i}`);
     const colorOfSquare = currentElement.addEventListener("mouseover", () => {
-      currentElement.style.backgroundColor = "black";
+      const color = generateColor();
+      currentElement.style.backgroundColor = color;
     });
   }
 }
@@ -35,4 +67,5 @@ function deleteGrid() {
     container.firstChild.remove();
   }
 }
+
 button.addEventListener("click", askForSizeOfSquares);
